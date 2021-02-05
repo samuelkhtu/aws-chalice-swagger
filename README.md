@@ -1,4 +1,4 @@
-# aws-chalice-template
+# AWS Chalice Template Project with Swagger UI
 
 AWS Chalice Starter Template with Build-in Swagger UI Support
 
@@ -6,17 +6,23 @@ AWS Chalice Starter Template with Build-in Swagger UI Support
 
 [AWS Chalice](https://aws.github.io/chalice/) is a micoservice framework for writing serverless appications in python. User can quickly create and deploy applications to AWS environment.
 
--   [AWS Chalice Tutorial & Documentation](https://aws.github.io/chalice/tutorials/index.html)
+- [AWS Chalice Tutorial & Documentation](https://aws.github.io/chalice/tutorials/index.html)
+
+<br>
 
 ## What is this project?
 
 This project provides a ready-to-use template for your project. The biggest value-add is the built-in Swagger UI.
 
+<br>
+
 ## Prerequisite
 
--   [Visual Studio Code](https://www.python.org/downloads/release/python-381/)
--   [Python](https://www.python.org/downloads/release/python-381/) >= 3.8.1
--   [AWS Credential](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+- [Visual Studio Code](https://www.python.org/downloads/release/python-381/)
+- [Python](https://www.python.org/downloads/release/python-381/) >= 3.8.1
+- [AWS Credential](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+
+<br>
 
 ## Install
 
@@ -83,24 +89,28 @@ Resources deployed:
 
 Copy & paste the URL from your terminal to your browser. You should see the familiar [Swagger UI](https://swagger.io/tools/swagger-ui/).
 
+<br>
+
 ## Environment Setup
 
 ### Log Level
 
 Log level is controlled by `ENV_LOG_LEVEL` environment variables. `.chalice\config.json`
 
--   CRITICAL
--   ERROR
--   WARNING
--   INFO
--   DEBUG
--   NOTSET
+- CRITICAL
+- ERROR
+- WARNING
+- INFO
+- DEBUG
+- NOTSET
 
--   Reference: [logging level](https://docs.python.org/3/library/logging.html#levels)
+- Reference: [logging level](https://docs.python.org/3/library/logging.html#levels)
+
+<br>
 
 ### Custom IAM Role Policy
 
 You can customize the IAM role policy with your project.
 
--   [AWS Chalice Document](https://aws.github.io/chalice/topics/configfile#iam-policy-file)
--   [AWS IAM Policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html)
+- [AWS Chalice Document](https://aws.github.io/chalice/topics/configfile#iam-policy-file)
+- [AWS IAM Policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html)
