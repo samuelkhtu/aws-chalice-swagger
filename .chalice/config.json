@@ -1,12 +1,25 @@
 {
-  "version": "1.0",
-  "app_name": "aws-chalice-template",
-  "stages": {
-    "dev": {
-      "api_gateway_stage": "dv"
-    },
-    "prod": {
-      "api_gateway_stage": "pd"
+    "version": "1.0",
+    "app_name": "aws-chalice-template",
+    "stages": {
+        "dev": {
+            "api_gateway_stage": "dv",
+            "environment_variables": {
+                "ENV_LOG_LEVEL": "INFO"
+            },
+            "autogen_policy": "False"
+        },
+        "qa": {
+            "api_gateway_stage": "qa",
+            "environment_variables": {
+                "ENV_LOG_LEVEL": "ERROR"
+            }
+        },
+        "prod": {
+            "api_gateway_stage": "pd",
+            "environment_variables": {
+                "ENV_LOG_LEVEL": "ERROR"
+            }
+        }
     }
-  }
 }
