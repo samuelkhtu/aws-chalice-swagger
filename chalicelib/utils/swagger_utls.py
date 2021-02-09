@@ -19,14 +19,14 @@ def get_swagger_ui(app: Chalice) -> str:
     """
     # Call internal API to retrieve static resource
     ui_bundle_js_url = build_api_endpoint(
-        current_request=app.current_request, request_path="ui_bundle_js"
+        current_request=app.current_request, request_path="ui-bundle-js"
     )
     css_url = build_api_endpoint(
         current_request=app.current_request, request_path="/css"
     )
     open_api_url = build_api_endpoint(
         current_request=app.current_request,
-        request_path="swagger_url",
+        request_path="swagger-url",
         query_params={"api_id": "", "stage": ""},
     )
     logger.info(f"open_api_url: {open_api_url}")
@@ -44,7 +44,7 @@ def get_swagger_ui(app: Chalice) -> str:
     return html
 
 
-def export_api_to_json(app: Chalice, exportType: str = "oas30") -> str:
+def export_api_to_json(app: Chalice, exportType: str = "swagger") -> str:
     """Call AWS API Gateway Export function to generate OAS json document
 
     Args:

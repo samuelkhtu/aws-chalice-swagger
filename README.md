@@ -75,7 +75,7 @@ Deploy To AWS
 
 ```bash
 
-❯ chalice deploy --no-autogen-policy
+❯ chalice deploy 
 
 Updating lambda function: aws-chalice-template-dev
 Updating rest API
@@ -84,8 +84,6 @@ Resources deployed:
   - Rest API URL: https://...execute-api.us-east-1.amazonaws.com/dv/
 
 ```
-
-> Node: Current issue [#1643](https://github.com/aws/chalice/issues/1643) prevent Chalice deploy to pick up `"autogen_policy": "False"` parameter correctly. Make sure to include `--no-autogen-policy` arguement
 
 Copy & paste the URL from your terminal to your browser. You should see the familiar [Swagger UI](https://swagger.io/tools/swagger-ui/).
 

@@ -4,10 +4,10 @@
     "stages": {
         "dev": {
             "api_gateway_stage": "dv",
+            "autogen_policy": false,
             "environment_variables": {
                 "ENV_LOG_LEVEL": "INFO"
-            },
-            "autogen_policy": "False"
+            }
         },
         "qa": {
             "api_gateway_stage": "qa",

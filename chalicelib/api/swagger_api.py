@@ -30,7 +30,7 @@ def get_css():
                         status_code=404)
 
 
-@swagger_api.route("/ui_bundle_js", methods=["GET"])
+@swagger_api.route("/ui-bundle-js", methods=["GET"])
 def get_swagger_ui_bundle():
     """Get Swagger UI Bundle JS Endpoint
 
@@ -50,6 +50,6 @@ def get_swagger_ui_bundle():
         return Response(body=f"{ui_js_file} not found. {ex}", status_code=404)
 
 
-@swagger_api.route("/swagger_url", methods=["GET"])
+@swagger_api.route("/swagger-url", methods=["GET"])
 def get_swagger_url():
     return export_api_to_json(swagger_api.current_app)

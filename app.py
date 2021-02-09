@@ -22,6 +22,7 @@ def get_doc():
     Returns:
         str: text/html for Swagger UI page
     """
+
     html = get_swagger_ui(app)
     return Response(body=html, status_code=200,
                     headers={"Content-Type": "text/html"},)
