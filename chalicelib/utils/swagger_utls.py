@@ -75,7 +75,9 @@ def remove_base_path_slash(api_spec_json_dict: Dict) -> Dict:
                                 "default"
                             ] = slash_stripped
                             logger.info(
-                                f"default base_path = {api_spec_json_dict['servers'][i]['variables']['basePath']['default']}"
+                                f"""default base_path =
+                                {api_spec_json_dict['servers'][i]
+                                ['variables']['basePath']['default']}"""
                             )
     return api_spec_json_dict
 
