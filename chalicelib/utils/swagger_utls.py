@@ -4,6 +4,7 @@ import logging
 from chalicelib.openapi import docs
 import boto3
 import json
+from typing import Dict
 
 logger = logging.getLogger()
 
@@ -22,7 +23,7 @@ def get_swagger_ui(app: Chalice) -> str:
         current_request=app.current_request, request_path="ui-bundle-js"
     )
     css_url = build_api_endpoint(
-        current_request=app.current_request, request_path="/css"
+        current_request=app.current_request, request_path="css"
     )
     open_api_url = build_api_endpoint(
         current_request=app.current_request,
@@ -44,7 +45,42 @@ def get_swagger_ui(app: Chalice) -> str:
     return html
 
 
-def export_api_to_json(app: Chalice, exportType: str = "swagger") -> str:
+def remove_base_path_slash(api_spec_json_dict: Dict) -> Dict:
+    """Remove leading slash in basePath property
+
+    Args:
+        api_spec_json_dict (Dict): OpenAPI spec in json dictionary format
+
+    Returns:
+        Dict: json dictionary with leading slash removed from 'basePath'
+    """
+    for key, value in api_spec_json_dict.items():
+        logger.debug(f"Json spec: {key}:{value}")
+        if key == "servers":
+            servers = api_spec_json_dict["servers"]
+            for i in range(len(servers)):
+                if "variables" in servers[i]:
+                    variables = servers[i]["variables"]
+                    logger.debug(f"servers[{i}]['variables'] = {variables}")
+                    if "basePath" in variables:
+                        base_path = variables["basePath"]
+                        logger.debug(f"variables['basePath'] = {base_path}")
+                        if "default" in base_path:
+                            default_base_path = base_path["default"]
+                            logger.debug(f"base_path['default'] = {default_base_path}")
+                            # Remove leading '/' otherwise url will generate incorrect path
+                            slash_stripped = default_base_path.strip("/")
+                            # update json dictionary
+                            api_spec_json_dict["servers"][i]["variables"]["basePath"][
+                                "default"
+                            ] = slash_stripped
+                            logger.info(
+                                f"default base_path = {api_spec_json_dict['servers'][i]['variables']['basePath']['default']}"
+                            )
+    return api_spec_json_dict
+
+
+def export_api_to_json(app: Chalice, exportType: str = "oas30") -> str:
     """Call AWS API Gateway Export function to generate OAS json document
 
     Args:
@@ -72,11 +108,13 @@ def export_api_to_json(app: Chalice, exportType: str = "swagger") -> str:
     # Read and decode the data
     body_data = streamingBody.read()
     decoded_content = body_data.decode("utf8")
-
     logger.debug(decoded_content)
 
+    # Remove basePath's slash to prevent incorrect url
+    api_spec = remove_base_path_slash(json.loads(decoded_content))
+
     # Load the JSON to a Python list & dump it back out as formatted JSON
-    result = json.dumps(json.loads(decoded_content), indent=4, sort_keys=False)
+    result = json.dumps(api_spec, indent=4, sort_keys=False)
     # print(s)
 
     return result

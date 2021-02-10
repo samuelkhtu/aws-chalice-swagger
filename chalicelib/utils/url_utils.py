@@ -25,9 +25,11 @@ def build_api_endpoint(
         if "stage" in query_params:
             query_params["stage"] = stage
 
-    url = f"https://{api_domain}/{stage}/{request_path.strip('/')}/?"
     if query_params is not None:
+        url = f"https://{api_domain}/{stage}/{request_path.strip('/')}/?"
         url = url + urlencode(query_params)
+    else:
+        url = f"https://{api_domain}/{stage}/{request_path.strip('/')}"
 
-    # print(url)
+    logger.info(f"Exit build_api_endpoint: {url}")
     return url
